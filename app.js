@@ -17,9 +17,10 @@ const display = async() => {
             </div>
             <div class="text">
                 <h6>${item.category}</h6>
-                <h5>${item.title.slice(0 , 22)}</h5>
-                <p>${item.price}</p>
+                <h5>${item.title.slice(0 , 22)}...</h5>
+                <p>${item.price}$</p>
             </div>
+            <button onclick ="details('${item.image}' , '${item.description}' , '${item.title}' , '${item.rating.rate}')">Details</button>
         `
         section.appendChild(div)
     })
@@ -32,7 +33,7 @@ searchField.addEventListener('keypress', async (e) => {
         const data = await loadData()
         const foundProducts = data.filter(product => product.category.includes(searchField.value.toLowerCase()));
         console.log(foundProducts)
-        if (foundProducts.length ) {
+        if (foundProducts.length) {
             foundProducts.forEach(products => {
                 const div = document.createElement('div');
                 div.classList.add('box');
@@ -42,10 +43,12 @@ searchField.addEventListener('keypress', async (e) => {
                     </div>
                     <div class="text">
                         <h6>${products.category}</h6>
-                        <h5>${products.title.slice(0 , 22)}</h5>
-                        <p>${products.price}</p>
+                        <h5>${products.title.slice(0, 22)}</h5>
+                        <p>${products.price}$</p>
                     </div>
-                `
+                    <button onclick ="details('${products.image}' , '${products.description}' , '${products.title}' , '${products.rating.rate}')">Details</button>
+
+                `   
                 section.appendChild(div)
             })
         }
@@ -55,4 +58,26 @@ searchField.addEventListener('keypress', async (e) => {
             `
         }
     }
-})
+});
+const modal = document.getElementById('modal');
+const main = document.getElementById('main');
+const backBtn = document.getElementById('backBtn');
+
+const details = (image, des, title, rating) => {
+    modal.innerHTML = `
+    <div class="img">
+        <img src="${image}" alt="">
+    </div>
+    <div class="text">
+        <h4>${title.slice(0,22)}..</h4>
+        <h5>${des.slice(0,200)}..</h5>
+        <p>Rating: ${rating}</p>
+    </div>
+    `;
+    main.style.display = 'block'
+};
+
+backBtn.addEventListener('click', () => {
+    main.style.display = 'none';
+    modal.textContent = '';
+});
