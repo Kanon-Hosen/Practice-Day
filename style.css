@@ -170,6 +170,9 @@ section .box button{
     section .box{
         margin: auto;
     }
+    section h1{
+        margin-left: 2rem;
+    }
     .main{
         width: 80%;
         margin: auto;
