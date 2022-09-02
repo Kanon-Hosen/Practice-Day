@@ -170,6 +170,10 @@ section .box button{
     section .box{
         margin: auto;
     }
+    .main{
+        width: 80%;
+        margin: auto;
+    }
 }
 @media only screen  and (min-width :586px ) and (max-width : 868px) {
     section{
